@@ -1,6 +1,6 @@
-# Nome do Projeto
+# Store Server
 
-Descrição breve do projeto.
+Aplicação em Node.js utilizando o Typescript. O projeto disponibiliza uma API em Rest para a manutenção de usuários, produtos e pedidos de um ecosistema.
 
 ## Pré-requisitos
 
