@@ -1,0 +1,9 @@
+/node_modules
+/dist
+src/public/uploads
+
+.env
+*.lock
+*-lock.json
+*.env
+*.http

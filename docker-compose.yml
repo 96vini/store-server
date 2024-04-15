@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  mongo:
+    build: ./mongodb-rs
+    restart: always
+    env_file:
+      - .env
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGODB_DATABASE}
+      MONGO_REPLICA_HOST: ${MONGO_REPLICA_HOST}
+      MONGO_REPLICA_PORT: ${MONGO_REPLICA_PORT}
+    ports:
+      - '27017:27017'
+
+
+
