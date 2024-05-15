@@ -2,7 +2,7 @@ import authentication from '@/modules/authentication';
 import { ValidationError } from '@/modules/errors';
 import validator from '@/modules/validator';
 import { IUserRepository } from '@/repositories/user-repository';
-import { CreateUserRequest } from '@/models/user';
+import { ICreateUserRequest } from '@/interfaces/user';
 
 class UserService {
   readonly userRepository: IUserRepository;
@@ -11,7 +11,7 @@ class UserService {
     this.userRepository = userRepository;
   }
 
-  async create(userData: CreateUserRequest) {
+  async create(userData: ICreateUserRequest) {
     const validUserData = await this.validatePostSchema(userData);
 
     await this.validateUniqueEmail(validUserData.email);
@@ -22,18 +22,13 @@ class UserService {
     return newUser;
   }
 
+  async findByEmail(email: string) {
+    const user = await this.userRepository.findOneByEmail(email);
+    return user;
+  }
+
   async findByUsername(username: string) {
     const user = await this.userRepository.findOneByUsername(username);
-    
-    if (!user) {
-      throw new ValidationError({
-        message: 'Nenhum usuário encontrado para essas credenciais.',
-        stack: new Error().stack,
-        errorLocationCode: 'SERVICE:USER:VALIDATE_USER:ALREADY_EXISTS',
-        key: 'email'
-      });
-    }
-
     return user;
   }
 
@@ -70,17 +65,19 @@ class UserService {
   }
 
   private validatePostSchema(postedUserData) {
-
     const cleanValues = validator(postedUserData, {
-      firstName: 'string',
-      lastName: 'string',
-      email: 'string',
+      first_name: 'string',
+      last_name: 'string',
+      username: 'string',
+      phone: 'string',
       password: 'string',
       address: {
         street: 'string',
+        number: 'string',
+        district: 'string',
         city: 'string',
         state: 'string',
-        zipCode: 'string'
+        zip_code: 'string'
       }
     });
 

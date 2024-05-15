@@ -1,4 +1,5 @@
-import { IUser, User } from '@/models/user';
+import { User } from '@/models/user';
+import { IUser } from '@/interfaces/user';
 
 import mongoose from 'mongoose';
 
@@ -40,12 +41,11 @@ class UserRepository implements IUserRepository {
 
     const user = {
       id: storedUser._id,
-      firstName: storedUser.firstName,
-      lastName: storedUser.lastName,
-      email: storedUser.email,
+      first_name: storedUser.first_name,
+      last_name: storedUser.last_name,
+      username: storedUser.username,
       password: storedUser.password,
-      address: storedUser.address ? storedUser.address : [],
-      cart: storedUser.cart ? storedUser.cart : []
+      addresses: storedUser.addresses ? storedUser.addresses : [],
     } as IUser;
 
     return user;

@@ -1,44 +1,6 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
-interface IProduct extends Document {
-  name: string;
-  category: 'object' | 't-shirt' | 'sneakers';
-  price: number;
-  color?: string;
-  size?: string;
-  quantity?: number;
-  dimensions?: {
-    length: number;
-    width: number;
-    height: number;
-  };
-}
-
-interface ICreateProductRequest {
-  name: string;
-  category: 'object' | 't-shirt' | 'sneakers';
-  price: number;
-  color?: string;
-  size?: string;
-  quantity?: number;
-  dimensions?: {
-    length: number;
-    width: number;
-    height: number;
-  }
-}
-
-interface IUpdateProductRequest {
-  id: string,
-}
-
-interface IFindProductByIdRequest {
-  id: string,
-}
-
-interface IDeleteProductRequest {
-  id: string,
-}
+import { IProduct } from '@/interfaces/product';
 
 const ProductSchema: Schema = new mongoose.Schema({
   name: {
@@ -78,11 +40,4 @@ const ProductSchema: Schema = new mongoose.Schema({
 
 const Product = mongoose.model<IProduct>('Product', ProductSchema);
 
-export { 
-  Product, 
-  IProduct,
-  ICreateProductRequest,
-  IUpdateProductRequest,
-  IFindProductByIdRequest,
-  IDeleteProductRequest
-};
+export { Product };

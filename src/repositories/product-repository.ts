@@ -1,6 +1,8 @@
-import { Product, IProduct, ICreateProductRequest } from '@/models/product';
+import { Product } from '@/models/product';
+import { ICreateProductRequest } from '@/interfaces/product';
+import { IProduct } from '@/interfaces/product';
 import { Location } from '@/types/types';
-import { ObjectId } from 'mongoose'; // Importação do ObjectId
+import { ObjectId } from 'mongoose';
 
 export interface IProductRepository {
   findAll(): Promise<IProduct[]>;

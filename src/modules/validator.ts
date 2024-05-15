@@ -18,7 +18,7 @@ export default function validator(object, keys) {
     'object.base': `Body enviado deve ser do tipo Object.`,
     'object.min': `Objeto enviado deve ter no mínimo uma chave.`
   });
-  console.log('AQUI', keys);
+
   for (const key of Object.keys(keys)) {
     console.log(key);
     const keyValidationFunction = schemas[key];
@@ -69,39 +69,39 @@ const schemas = {
         })
     });
   },
-  firstName: function () {
+  first_name: function () {
     return Joi.object({
-      firstName: Joi.string()
+      first_name: Joi.string()
         .alphanum()
         .min(3)
         .max(30)
         .trim()
         .invalid(null)
-        .when('$required.firstName', {
+        .when('$required.first_name', {
           is: 'required',
           then: Joi.required(),
           otherwise: Joi.optional()
         })
         .messages({
-          'any.required': `"firstName" é um campo obrigatório.`,
-          'string.empty': `"firstName" não pode estar em branco.`,
-          'string.base': `"firstName" deve ser do tipo String.`,
-          'string.alphanum': `"firstName" deve conter apenas caracteres alfanuméricos.`,
-          'string.min': `"firstName" deve conter no mínimo {#limit} caracteres.`,
-          'string.max': `"firstName" deve conter no máximo {#limit} caracteres.`,
-          'any.invalid': `"firstName" possui o valor inválido "null".`,
+          'any.required': `"first_name" é um campo obrigatório.`,
+          'string.empty': `"first_name" não pode estar em branco.`,
+          'string.base': `"first_name" deve ser do tipo String.`,
+          'string.alphanum': `"first_name" deve conter apenas caracteres alfanuméricos.`,
+          'string.min': `"first_name" deve conter no mínimo {#limit} caracteres.`,
+          'string.max': `"first_name" deve conter no máximo {#limit} caracteres.`,
+          'any.invalid': `"first_name" possui o valor inválido "null".`,
         })
     });
   },
-  lastName: function () {
+  last_name: function () {
     return Joi.object({
-      lastName: Joi.string()
+      last_name: Joi.string()
         .alphanum()
         .min(3)
         .max(30)
         .trim()
         .invalid(null)
-        .when('$required.lastName', {
+        .when('$required.last_name', {
           is: 'required',
           then: Joi.required(),
           otherwise: Joi.optional()
@@ -118,30 +118,46 @@ const schemas = {
         })
     });
   },
-  email: function () {
+  username: function () {
     return Joi.object({
-      email: Joi.string()
-        .email()
-        .min(7)
+      username: Joi.string()
         .max(254)
         .lowercase()
         .trim()
         .invalid(null)
-        .when('$required.email', {
+        .when('$required.username', {
           is: 'required',
           then: Joi.required(),
           otherwise: Joi.optional()
         })
         .messages({
-          'any.required': `"email" é um campo obrigatório.`,
-          'string.empty': `"email" não pode estar em branco.`,
-          'string.base': `"email" deve ser do tipo String.`,
-          'string.email': `"email" deve conter um email válido.`,
-          'any.invalid': `"email" possui o valor inválido "null".`
+          'any.required': `"username" é um campo obrigatório.`,
+          'string.empty': `"username" não pode estar em branco.`,
+          'string.base': `"username" deve ser do tipo String.`,
+          'any.invalid': `"username" possui o valor inválido "null".`
         })
     });
   },
-
+  phone: function () {
+    return Joi.object({
+      phone: Joi.string()
+        .max(254)
+        .lowercase()
+        .trim()
+        .invalid(null)
+        .when('$required.phone', {
+          is: 'required',
+          then: Joi.required(),
+          otherwise: Joi.optional()
+        })
+        .messages({
+          'any.required': `"phone" é um campo obrigatório.`,
+          'string.empty': `"phone" não pode estar em branco.`,
+          'string.base': `"phone" deve ser do tipo String.`,
+          'any.invalid': `"phone" possui o valor inválido "null".`
+        })
+    });
+  },
   password: function () {
     return Joi.object({
       // Why 72 in max length? https://security.stackexchange.com/a/39851
@@ -168,8 +184,16 @@ const schemas = {
   address: function () {
     return Joi.object({
       street: Joi.string().trim().optional().messages({
-        'string.empty': `"street" não pode estar em branco.`,
-        'string.base': `"street" deve ser do tipo String.`,
+        'string.empty': `"street" cannot be null.`,
+        'string.base': `"street" must be type of String.`,
+      }),
+      number: Joi.string().trim().optional().messages({
+        'string.empty': `"number cannot be null"`,
+        'string.base': `"number must be type of String."`,
+      }),
+      district: Joi.string().trim().optional().messages({
+        'string.empty': `"district" cannot be null`,
+        'string.base': `"district" must be type of String`,
       }),
       city: Joi.string().trim().optional().messages({
         'string.empty': `"city" não pode estar em branco.`,
@@ -179,9 +203,9 @@ const schemas = {
         'string.empty': `"state" não pode estar em branco.`,
         'string.base': `"state" deve ser do tipo String.`,
       }),
-      zipCode: Joi.string().trim().optional().messages({
-        'string.empty': `"zipCode" não pode estar em branco.`,
-        'string.base': `"zipCode" deve ser do tipo String.`,
+      zip_code: Joi.string().trim().optional().messages({
+        'string.empty': `"zip_code" não pode estar em branco.`,
+        'string.base': `"zip_code" deve ser do tipo String.`,
       }),
     });
   },
@@ -392,5 +416,3 @@ const schemas = {
     });
   }
 };
-
-const reservedDevUsernames = ['admin', 'user'];

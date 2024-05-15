@@ -1,83 +1,72 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
-interface IUser extends Document {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  address?: {
-    street: string;
-    city: string;
-    state: string;
-    zipCode: string;
-  };
-  cart?: {
-    productId: mongoose.Types.ObjectId;
-    quantity: number;
-  }[];
-}
-
-type CreateUserRequest = {
-  firstName: string,
-  lastName: string,
-  email: string,
-  password: string,
-  address: {
-    street: string,
-    city: string,
-    state: string,
-    zipCode: string
-  }
-}
+import { IUser } from '@/interfaces/user';
 
 const UserSchema: Schema = new mongoose.Schema({
-  firstName: {
+  first_name: {
     type: String,
     required: true,
   },
-  lastName: {
+  middle_name: {
+    type: String,
+  },
+  last_name: {
     type: String,
     required: true,
   },
-  email: {
+  username: {
     type: String,
     required: true,
     unique: true,
     lowercase: true,
     trim: true,
   },
+  phone:  {
+    type: String,
+    required: true,
+    unique: true,
+  },
   password: {
     type: String,
     required: true,
   },
-  address: {
-    street: {
-      type: String,
-    },
-    city: {
-      type: String,
-    },
-    state: {
-      type: String,
-    },
-    zipCode: {
-      type: String,
-    },
-  },
-  cart: [
+  address: [
     {
-      productId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product',
+      street: {
+        type: String,
+        required: true,
       },
-      quantity: {
-        type: Number,
-        default: 1,
+      number: {
+        type: String,
+        required: true,
       },
-    },
+      complement: {
+        type: String,
+      },
+      district: {
+        type: String,
+        required: true,
+      },
+      city: {
+        type: String,
+        required: true,
+      },
+      state: {
+        type: String,
+        required: true,
+      },
+      zip_code: {
+        type: String,
+        required: true,
+      },
+      reference: {
+        type: String,
+        required: true,
+      }
+    }
   ],
 });
 
 const User = mongoose.model<IUser>('User', UserSchema);
 
-export { User, IUser, CreateUserRequest };
+export { User, IUser };

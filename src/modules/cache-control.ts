@@ -14,7 +14,7 @@ function setCacheControl(reply: FastifyReply, cacheControl: string): void {
 
   const setHeader = reply.header.bind(reply);
 
-  reply.header = (name: string, value: any) => {
+  reply.header = (name: string, value: string) => {
     if (name.toLowerCase() === 'cache-control') {
       throw new InternalServerError({
         message: `Header Cache-Control já foi definido.`,

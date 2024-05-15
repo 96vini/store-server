@@ -2,14 +2,13 @@ import { FastifyRequest, FastifyReply } from 'fastify';
 
 import OrderService from '@/services/order-service';
 
-import {
+import { 
   IOrder,
   ICreateOrderRequest,
   IUpdateStatusOrderRequest,
   IFindOrderByIdRequest,
   IFindByUserIDRequest,
-  IDeleteOrderRequest
-} from '@/models/order';
+  IDeleteOrderRequest } from '@/interfaces/order';
 
 export default class OrderController {
   readonly orderService: OrderService;

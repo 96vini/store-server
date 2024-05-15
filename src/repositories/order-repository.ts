@@ -1,5 +1,7 @@
-import { Order, IOrder } from '@/models/order';
 import mongoose, { ObjectId } from 'mongoose';
+
+import { Order } from '@/models/order';
+import { IOrder } from '@/interfaces/order';
 
 interface Location {
   coordinates: number[];

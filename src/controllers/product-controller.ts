@@ -8,7 +8,7 @@ import {
   IUpdateProductRequest,
   IFindProductByIdRequest,
   IDeleteProductRequest
-} from '@/models/product';
+} from '@/interfaces/product';
 
 export default class ProductController {
   readonly productService: ProductService;

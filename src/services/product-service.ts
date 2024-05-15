@@ -1,5 +1,4 @@
 import { IProductRepository } from "@/repositories/product-repository";
-import { IProduct, ICreateProductRequest} from "@/models/product";
 import HttpResponse from '@/utils/HttpResponse';
 
 class ProductService {
